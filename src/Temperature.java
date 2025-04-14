@@ -1,6 +1,13 @@
+/*
+@ASSESSME.USERID: mj6269   
+@ASSESSME.AUTHOR: Mateo Josipovic
+@ASSESSME.DESCRIPTION: 
+@ASSESSME.ANALYZE: YES
+*/
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Temperature {
 
@@ -16,15 +23,11 @@ public class Temperature {
      * @return
      */
     public static TemperatureScale createF2C() {
-        TemperatureScale f2C = null;
-
-        // Delete from here
-       
-
-        
-        // to here
-
-        return f2C;
+        return new TemperatureScale() {
+            public double convert (double temperature) {
+                return (temperature - 32) / 1.8;
+            }
+        };
     }
 
     /**

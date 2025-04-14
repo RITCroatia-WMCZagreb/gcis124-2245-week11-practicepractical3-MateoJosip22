@@ -1,3 +1,10 @@
+/*
+@ASSESSME.USERID: mj6269   
+@ASSESSME.AUTHOR: Mateo Josipovic
+@ASSESSME.DESCRIPTION: 
+@ASSESSME.ANALYZE: YES
+*/
+
 public class FunWithThreads2 {
 
 
@@ -5,16 +12,46 @@ public class FunWithThreads2 {
     public FunWithThreads2(){
         System.out.println("MAIN START");
         
+        Thread t1 = new Thread(new MyThread("Thread 1"));
+        Thread t2 = new Thread(new MyThread("Thread 2"));
+        t1.start();
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        t2.start();
+
         System.out.println("MAIN END");
     }
 
     public static void main(String[] args) throws Exception {
-        
         new FunWithThreads2();
-
     }
 
+    class MyThread implements Runnable{
 
+        private String name="";
+        public MyThread(String name){
+            this.name = name;
+        }
+        @Override
+        public void run() {
+            for(int i=0;i<10;i++){
+                System.out.println(this.name + " " + i);    
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+       
+    }
 }
 
 /*
