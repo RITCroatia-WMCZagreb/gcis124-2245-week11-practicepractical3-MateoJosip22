@@ -12,6 +12,8 @@ program will instantiate an object of class Threads, calling its constructor.
 The constructor will generate the following output (beginning of output omitted 
 for space):
 
+
+
     Thread 5 counter 42 
     Thread 4 counter 39 
     Thread 3 counter 36 
@@ -59,14 +61,59 @@ to code this any way you want as long as the threads run concurrently.
 
 public class SimpleThreading {
 
-   
-    public SimpleThreading(){
-      
+    private static int counter = 90;
+
+
+    private static final Object lock = new Object();
+
+
+    public SimpleThreading() {
+
+        for (int i = 1; i <= 5; i++) {
+            Thread t = new Thread(new MyRunnable(i));
+            t.start();
+        }
+
+
+        try {
+            Thread.sleep(1000); 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Main: at end counter = " + counter);
+    }
+
+
+    static class MyRunnable implements Runnable {
+        private int threadNumber;
+
+        public MyRunnable(int number) {
+            this.threadNumber = number;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                synchronized (lock) {
+                    if (counter == 0) {
+                        break; 
+                    }
+
+                    counter -= 3; 
+                    System.out.println("Thread " + threadNumber + " counter " + counter);
+                }
+
+                try {
+                    Thread.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
         new SimpleThreading();
     }
-    
-    
 }

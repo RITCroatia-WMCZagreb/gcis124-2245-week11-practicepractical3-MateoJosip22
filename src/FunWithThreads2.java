@@ -25,7 +25,7 @@ public class FunWithThreads2 {
 
         t2.start();
 
-        System.out.println("MAIN END");
+        System.out.println("Thread start:Thread 2");
     }
 
     public static void main(String[] args) throws Exception {

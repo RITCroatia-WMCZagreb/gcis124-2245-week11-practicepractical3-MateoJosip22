@@ -34,5 +34,9 @@ public class SquareRoots {
     public static void main(String[] args) {
         List<Integer> squares = Arrays.asList(9, 16, -1,- 4, 625, 25, 0, 144, -81);
        
+
+        squares.stream()
+                .filter(n -> n >= 0)
+                .forEach(n -> System.out.println(Math.sqrt(n)));
     }
 }
